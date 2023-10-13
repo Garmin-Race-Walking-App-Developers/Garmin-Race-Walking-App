@@ -1,12 +1,12 @@
 # Garmin Race Walking App
 
+## Start developing
 
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+- dev is the default plan, all feature branches should be created from dev.
+- Development process:
+- [ ] [Merge feature branch into dev branch]
+- [ ] [Merge dev branch into stg branch for testing]
+- [ ] [Merge stg branch into main branch for deploying]
 
 ## Add your files
 
@@ -19,11 +19,4 @@ git remote add origin https://gitlab.com/hmn45/garmin-race-walking-app.git
 git branch -M main
 git push -uf origin main
 ```
-
-## Start developing
-- dev is the default plan, all feature branches should be created from dev.
-- Development process:
-- [ ] [Merge feature branch into dev branch]
-- [ ] [Merge dev branch into stg branch for testing]
-- [ ] [Merge stg branch into main branch for deploying]
 
