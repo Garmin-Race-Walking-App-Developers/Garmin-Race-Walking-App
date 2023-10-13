@@ -1,0 +1,19 @@
+stages:
+  - build
+  - test
+
+build-job:
+    stage: build
+    script:
+        echo "Dev built successfully"
+
+test-job:
+    stage: test
+    only: 
+        - stg
+        - main
+    script:
+        echo "Stg tests passed"
+
+
+
