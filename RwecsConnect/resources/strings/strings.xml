@@ -1,7 +1,7 @@
 <strings>
     <string id="AppName">RwecsConnect</string>
 
-    <!-- <string id="prompt">Click the menu button</string> -->
+    <!-- Welcome screen Strings -->
     <string id="prompt">Welcome to</string>
     <string id="prompt2">RWECS connect</string>
     <string id="prompt3">Swipe up to begin</string>
