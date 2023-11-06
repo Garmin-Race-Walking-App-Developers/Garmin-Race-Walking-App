@@ -29,5 +29,4 @@ class RwecsConnectView extends WatchUi.View {
     // memory.
     function onHide() as Void {
     }
-
 }
