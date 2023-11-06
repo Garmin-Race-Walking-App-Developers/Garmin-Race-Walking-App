@@ -1,0 +1,51 @@
+<layout id="WorkoutLayout">
+    <label
+        x="center" 
+        y="5%" 
+        text="@Strings.alarmLimitPrompt" 
+        font="Gfx.FONT_SMALL"
+        color="Graphics.COLOR_WHITE" 
+        justification="Graphics.TEXT_JUSTIFY_CENTER" 
+    />
+    <label
+        id = "alarm_limit"
+        x="center" 
+        y="15%" 
+        text="@Strings.alarmLimitValue" 
+        font="Gfx.FONT_SMALL"
+        color="Graphics.COLOR_WHITE" 
+        justification="Graphics.TEXT_JUSTIFY_CENTER" 
+    />
+    <label
+        id = "sensor1_name"
+        x="center" 
+        y="35%" 
+        text="@Strings.sensor1Name" 
+        color="Graphics.COLOR_WHITE" 
+        justification="Graphics.TEXT_JUSTIFY_CENTER" 
+    />
+    <label
+        id = "sensor1_battery"
+        x="center" 
+        y="45%" 
+        text="@Strings.sensor1Battery" 
+        color="Graphics.COLOR_GREEN" 
+        justification="Graphics.TEXT_JUSTIFY_CENTER" 
+    />
+    <label 
+        id = "sensor2_name"
+        x="center" 
+        y="60%" 
+        text="@Strings.sensor2Name" 
+        color="Graphics.COLOR_WHITE" 
+        justification="Graphics.TEXT_JUSTIFY_CENTER" 
+    />
+    <label 
+        id = "sensor2_battery"
+        x="center" 
+        y="70%" 
+        text="@Strings.sensor2Battery" 
+        color="Graphics.COLOR_GREEN" 
+        justification="Graphics.TEXT_JUSTIFY_CENTER" 
+    />
+</layout>

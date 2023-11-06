@@ -2,8 +2,19 @@
     <string id="AppName">RwecsConnect</string>
 
     <!-- <string id="prompt">Click the menu button</string> -->
-    <string id="prompt">Hello World</string>
+    <string id="prompt">Welcome to</string>
+    <string id="prompt2">RWECS connect</string>
+    <string id="prompt3">Swipe up to begin</string>
+    
 
-    <string id="menu_label_1">Item 1</string>
-    <string id="menu_label_2">Item 2</string>
+    <string id="start">Start</string>
+    <string id="settings">Settings</string>
+
+    <string id="sensor1Name">RWECS 69</string>
+    <string id="sensor1Battery">100%</string>
+    <string id="sensor2Name">RWECS 70</string>
+    <string id="sensor2Battery">100%</string>
+
+    <string id="alarmLimitPrompt">Alarm Limit:</string>
+    <string id="alarmLimitValue">50ms</string>
 </strings>
