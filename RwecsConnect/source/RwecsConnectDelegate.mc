@@ -8,8 +8,12 @@ class RwecsConnectDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onMenu() as Boolean {
-        WatchUi.pushView(new Rez.Menus.MainMenu(), new RwecsConnectMenuDelegate(), WatchUi.SLIDE_UP);
+        WatchUi.pushView(new RwecsConnectMenu(), new RwecsConnectMenuDelegate(), WatchUi.SLIDE_UP);
         return true;
     }
 
+    function onNextPage() as Boolean {
+        WatchUi.pushView(new RwecsConnectMenu(), new RwecsConnectMenuDelegate(), WatchUi.SLIDE_UP);
+        return true;
+    }
 }

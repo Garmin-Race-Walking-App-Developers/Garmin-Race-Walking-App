@@ -1,0 +1,17 @@
+<layout id="SettingsLayout">
+    <label
+        x="center" 
+        y="40%" 
+        text="@Strings.alarmLimitPrompt" 
+        color="Graphics.COLOR_WHITE" 
+        justification="Graphics.TEXT_JUSTIFY_CENTER" 
+    />
+    <label
+        id = "alarm_limit"
+        x="center" 
+        y="60%" 
+        text="@Strings.alarmLimitValue" 
+        color="Graphics.COLOR_WHITE" 
+        justification="Graphics.TEXT_JUSTIFY_CENTER" 
+    />
+</layout>
