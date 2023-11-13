@@ -14,7 +14,7 @@ class RwecsConnectMenuDelegate extends WatchUi.Menu2InputDelegate {
     function onSelect(item as WatchUi.MenuItem) {
         if (item.getId().equals("start")) {
             var view = new RwecsWorkoutView(_defaultAlarmLimitValue);
-            WatchUi.pushView(view, new RwecsWorkoutDelegate(view), WatchUi.SLIDE_UP); 
+            WatchUi.pushView(view, new RwecsWorkoutDelegate(view, btHandler), WatchUi.SLIDE_UP); 
         } 
         else if (item.getId().equals("settings")) {
             var view = new RwecsSettingsView(_defaultAlarmLimitValue);
