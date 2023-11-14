@@ -4,7 +4,7 @@
     <!-- Welcome screen Strings -->
     <string id="prompt">Welcome to</string>
     <string id="prompt2">RWECS connect</string>
-    <string id="prompt3">Swipe up to begin</string>
+    <string id="prompt3">Press start to begin</string>
     
 
     <string id="start">Start</string>

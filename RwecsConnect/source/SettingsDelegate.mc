@@ -3,7 +3,7 @@ import Toybox.WatchUi;
 import Toybox.Timer;
 import Toybox.Math;
 
-class RwecsSettingsDelegate extends WatchUi.InputDelegate {
+class SettingsDelegate extends WatchUi.InputDelegate {
     var _view;
 
     function initialize(view) {

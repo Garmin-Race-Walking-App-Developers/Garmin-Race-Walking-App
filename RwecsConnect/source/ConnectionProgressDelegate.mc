@@ -8,13 +8,12 @@ class ConnectionProgressDelegate extends WatchUi.BehaviorDelegate {
     private var timerCount;
     private var progressBar;
 
-    function initialize(btHandler, progressBar) {
+    function initialize(progressBar) {
         BehaviorDelegate.initialize();
-        self.btHandler = btHandler;
+        btHandler = BluetoothHandler.getInstance();
         self.progressBar = progressBar;
         timerCount = 0;
         timer = new Timer.Timer();
-        Ble.setDelegate(btHandler);
 
         btHandler.startScan();
         timer.start(method(:timerCallBack), 3000, true);
@@ -31,7 +30,7 @@ class ConnectionProgressDelegate extends WatchUi.BehaviorDelegate {
 
         if (connectableDevices.size() > 0) {
             endLoop();
-            WatchUi.switchToView(new DeviceConnectionMenu(connectableDevices.keys()), new DeviceConnectionDelegate(btHandler), WatchUi.SLIDE_UP);    
+            WatchUi.switchToView(new DeviceConnectionMenu(connectableDevices.keys()), new DeviceConnectionDelegate(), WatchUi.SLIDE_UP);    
         } 
         else if (timerCount == 10 ) {
             progressBar.setDisplayString(
