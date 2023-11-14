@@ -5,14 +5,14 @@ import Toybox.Math;
 using Toybox.BluetoothLowEnergy as Ble;
 
 class RwecsWorkoutDelegate extends WatchUi.InputDelegate {
-    var _view;
-    protected var btHandler;
+    private var _view;
+    private var _deviceController;
 
-    function initialize(view, btHandler) {
+
+    function initialize(view) {
         InputDelegate.initialize();
-        _view = view;  
-
-        self.btHandler = btHandler;
+        _view = view; 
+        _deviceController = new DeviceController(); 
     }
 
     function onKey(keyEvent as KeyEvent) {
@@ -27,7 +27,7 @@ class RwecsWorkoutDelegate extends WatchUi.InputDelegate {
     }
 
     private function startWorkout() {
-        btHandler.enableTrainingMode();
+        _deviceController.enableTrainingMode();
     }
 
 }
