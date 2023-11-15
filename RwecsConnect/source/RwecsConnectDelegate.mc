@@ -16,4 +16,11 @@ class RwecsConnectDelegate extends WatchUi.BehaviorDelegate {
         WatchUi.pushView(new RwecsConnectMenu(), new RwecsConnectMenuDelegate(), WatchUi.SLIDE_UP);
         return true;
     }
+
+    function onSelect() as Boolean {
+        WatchUi.pushView(new RwecsConnectMenu(), new RwecsConnectMenuDelegate(), WatchUi.SLIDE_UP);
+        return true;
+    }
+
+
 }

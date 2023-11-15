@@ -16,7 +16,14 @@ class RwecsConnectMenuDelegate extends WatchUi.Menu2InputDelegate {
         } 
         else if (item.getId().equals("settings")) {
             var view = new RwecsSettingsView(_defaultAlarmLimitValue);
-            WatchUi.pushView(view, new RwecsSettingsDelegate(view), WatchUi.SLIDE_UP); 
+            WatchUi.pushView(view, new SettingsDelegate(view), WatchUi.SLIDE_UP); 
+        }
+        else if (item.getId().equals("connect")) {
+            var progressBar = new WatchUi.ProgressBar(
+                "Searching for \nRWECS devices...",
+                null
+            );
+            WatchUi.pushView(progressBar, new ConnectionProgressDelegate(progressBar), WatchUi.SLIDE_LEFT);
         }
     }
 }
