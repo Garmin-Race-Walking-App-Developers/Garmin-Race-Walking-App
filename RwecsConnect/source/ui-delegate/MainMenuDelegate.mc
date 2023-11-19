@@ -2,7 +2,7 @@ import Toybox.Lang;
 import Toybox.System;
 import Toybox.WatchUi;
 
-class RwecsConnectMenuDelegate extends WatchUi.Menu2InputDelegate {
+class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
     private const _defaultAlarmLimitValue = 40;
 
     function initialize() {
@@ -23,7 +23,7 @@ class RwecsConnectMenuDelegate extends WatchUi.Menu2InputDelegate {
                 "Searching for \nRWECS devices...",
                 null
             );
-            WatchUi.pushView(progressBar, new ConnectionProgressDelegate(progressBar), WatchUi.SLIDE_LEFT);
+            WatchUi.pushView(progressBar, new DeviceSearchProgressDelegate(progressBar), WatchUi.SLIDE_LEFT);
         }
     }
 }

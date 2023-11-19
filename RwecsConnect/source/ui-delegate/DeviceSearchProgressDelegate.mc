@@ -2,7 +2,7 @@ import Toybox.WatchUi;
 import Toybox.Timer;
 using Toybox.BluetoothLowEnergy as Ble;
 
-class ConnectionProgressDelegate extends WatchUi.BehaviorDelegate {
+class DeviceSearchProgressDelegate extends WatchUi.BehaviorDelegate {
     private var btHandler;
     private var timer;
     private var timerCount;
@@ -16,7 +16,7 @@ class ConnectionProgressDelegate extends WatchUi.BehaviorDelegate {
         timer = new Timer.Timer();
 
         btHandler.startScan();
-        timer.start(method(:timerCallBack), 3000, true);
+        timer.start(method(:timerCallBack), 5000, true);
     }
 
     function onBack() {
@@ -32,11 +32,13 @@ class ConnectionProgressDelegate extends WatchUi.BehaviorDelegate {
             endLoop();
             WatchUi.switchToView(new DeviceConnectionMenu(connectableDevices.keys()), new DeviceConnectionDelegate(), WatchUi.SLIDE_UP);    
         } 
-        else if (timerCount == 10 ) {
+        else if (timerCount == 3 ) {
             progressBar.setDisplayString(
                 "No devices nearby \n returning");
+            timer.stop();
+            timer.start(method(:timerCallBack), 1000, true);
         }
-        else if (timerCount > 10) {
+        else if (timerCount > 3) {
             endLoop();
             WatchUi.popView(WatchUi.SLIDE_RIGHT);
         }

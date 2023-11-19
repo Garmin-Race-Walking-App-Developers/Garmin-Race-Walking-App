@@ -1,6 +1,6 @@
 import Toybox.WatchUi;
 
-class RwecsConnectMenu extends WatchUi.Menu2 {
+class MainMenu extends WatchUi.Menu2 {
     private const menuOptions = {
         "start" => "             Start",
         "connect" => "           Connect",

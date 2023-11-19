@@ -4,6 +4,8 @@ import Toybox.Timer;
 import Toybox.Math;
 
 class CompetitionView extends WatchUi.View {
+    private var _deviceController;
+
     private var _sensor1NameElement;
     private var _sensor2NameElement;
     private var _sensor1BatteryElement;
@@ -42,7 +44,6 @@ class CompetitionView extends WatchUi.View {
         batteryTimer.start(method(:updateBatteryLevel), 2000, true);
 
         flightTimeTimer = new Timer.Timer();
-        flightTimeTimer.start(method(:updateFlightTimeStatus), _alarmLimitValue, true);
     }
 
     // Called when this View is brought to the foreground. Restore
@@ -97,6 +98,10 @@ class CompetitionView extends WatchUi.View {
         }
 
         WatchUi.requestUpdate();
+    }
+
+    function startFlightTimeTracking() {
+        flightTimeTimer.start(method(:updateFlightTimeStatus), 100, true);
     }
 
     // TODO: Implement real function that uses flight time data coming from RWECS sensors
