@@ -25,7 +25,8 @@ class WorkoutDelegate extends WatchUi.InputDelegate {
 
         //Back button is pressed
         if (keyEvent.getKey() == WatchUi.KEY_ESC) {
-           WatchUi.popView(WatchUi.SLIDE_DOWN);
+            _parentView.killTimer();
+            WatchUi.popView(WatchUi.SLIDE_DOWN);
         }
 
         return true;

@@ -19,9 +19,13 @@ class WorkoutView extends WatchUi.View {
     private var _timerValue as Number;
     private var _paused as Boolean;
 
+    private var _alarmLimitValue as Number;
+
     //intialize the workout view
-    function initialize() {
+    function initialize(alarmLimit as Number) {
         View.initialize();
+
+        _alarmLimitValue = alarmLimit;
         
         _hrString = "---";
         _locString = "--";
@@ -116,6 +120,13 @@ class WorkoutView extends WatchUi.View {
         _timerString = "0:00:00";
         
         WatchUi.requestUpdate();
+    }
+
+    /**
+    * Function to kill timer when the view is exited
+    */
+    function killTimer() {
+       _timer.stop(); 
     }
 
 

@@ -3,7 +3,7 @@ import Toybox.WatchUi;
 import Toybox.Timer;
 import Toybox.Math;
 
-class RwecsWorkoutView extends WatchUi.View {
+class COmpetitionView extends WatchUi.View {
     private var _sensor1NameElement;
     private var _sensor2NameElement;
     private var _sensor1BatteryElement;
