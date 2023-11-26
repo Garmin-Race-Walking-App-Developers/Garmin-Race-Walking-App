@@ -1,4 +1,7 @@
 <drawables>
     <bitmap id="LauncherIcon" filename="launcher_icon.png" />
     <bitmap id="BLEIcon" filename="ble.bmp" />
+    <bitmap id="heartRate" filename="../images/heart_rate.jpg" />
+    <bitmap id="loc" filename="../images/loc.jpg" />
+    <bitmap id="timer" filename="../images/timer.jpg" />
 </drawables>

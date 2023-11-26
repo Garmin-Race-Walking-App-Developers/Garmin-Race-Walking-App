@@ -25,8 +25,8 @@ class SettingsDelegate extends WatchUi.InputDelegate {
         //Start button is pressed
         else if (keyEvent.getKey() == WatchUi.KEY_ENTER) {
             var alarmLimitValue = _view.getAlarmLimitValue();
-            var newWorkoutView = new RwecsWorkoutView(alarmLimitValue);
-            WatchUi.switchToView(newWorkoutView, new RwecsWorkoutDelegate(newWorkoutView), WatchUi.SLIDE_UP); 
+            var newWorkoutView = new WorkoutView(alarmLimitValue);
+            WatchUi.switchToView(newWorkoutView, new WorkoutDelegate(newWorkoutView), WatchUi.SLIDE_UP); 
         }
 
         //Back button is pressed
