@@ -4,7 +4,7 @@ import Toybox.Timer;
 import Toybox.Math;
 using Toybox.BluetoothLowEnergy as Ble;
 
-class RwecsWorkoutDelegate extends WatchUi.InputDelegate {
+class CompetitionDelegate extends WatchUi.InputDelegate {
     private var _view;
     private var _deviceController;
 
