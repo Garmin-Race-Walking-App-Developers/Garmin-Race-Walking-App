@@ -11,11 +11,11 @@ class RwecsConnectMenuDelegate extends WatchUi.Menu2InputDelegate {
 
     function onSelect(item as WatchUi.MenuItem) {
         if (item.getId().equals("start")) {
-            var view = new WorkoutView();
-            WatchUi.pushView(view, new RwecsWorkoutDelegate(view), WatchUi.SLIDE_UP); 
+            var view = new WorkoutView(_defaultAlarmLimitValue);
+            WatchUi.pushView(view, new WorkoutDelegate(view), WatchUi.SLIDE_UP); 
         } 
         else if (item.getId().equals("settings")) {
-            var view = new RwecsSettingsView(_defaultAlarmLimitValue);
+            var view = new SettingsView(_defaultAlarmLimitValue);
             WatchUi.pushView(view, new SettingsDelegate(view), WatchUi.SLIDE_UP); 
         }
         else if (item.getId().equals("connect")) {

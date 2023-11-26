@@ -3,7 +3,7 @@ import Toybox.WatchUi;
 import Toybox.Timer;
 import Toybox.Math;
 
-class RwecsSettingsView extends WatchUi.View {
+class SettingsView extends WatchUi.View {
     private var _alarmLimitValueElement;
     private var _alarmLimitValue;
 
