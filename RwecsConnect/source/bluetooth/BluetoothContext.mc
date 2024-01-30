@@ -10,8 +10,12 @@ class BluetoothContext {
     private static var _customServiceControlUuid = Ble.stringToUuid("D973F2E2-B19E-11E2-9E96-0800200C9A66");
 
     //Controller Commands
+    static const GET_ID = [ 'i' ]b;
+    static const INITIAL_STATE = [ 'I' ]b;
     static const TRAINING_MODE = [ 'T' ]b;
     static const COMPETITION_MODE = [ 'C' ]b;
+    static const REQUEST_FLIGHT_TIME = [ 'A' ]b;
+    static const ENABLE_NOTIFY = [0x01,0x00]b;
 
     function initialize() {
         registerProfiles();
