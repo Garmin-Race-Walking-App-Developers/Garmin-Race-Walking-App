@@ -6,11 +6,15 @@ import Toybox.Lang;
 
 class WorkoutDelegate extends WatchUi.InputDelegate {
     private var _parentView as WorkoutView;
+    private var _deviceController;
     
 
     function initialize(view) {
         InputDelegate.initialize();
         _parentView = view;  
+        _deviceController = new DeviceController();
+
+        _deviceController.enableTrainingMode();
     }
 
     function onKey(keyEvent as KeyEvent) {
@@ -26,6 +30,7 @@ class WorkoutDelegate extends WatchUi.InputDelegate {
         //Back button is pressed
         if (keyEvent.getKey() == WatchUi.KEY_ESC) {
             _parentView.killTimer();
+            _deviceController.resetDevice();
             WatchUi.popView(WatchUi.SLIDE_DOWN);
         }
 

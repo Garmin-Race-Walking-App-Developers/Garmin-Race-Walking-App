@@ -11,11 +11,15 @@ class DeviceConnectionDelegate extends WatchUi.Menu2InputDelegate {
 
     function onSelect(item as Symbol) as Void {
         try {
-            BluetoothHandler.getInstance().connectToDeviceByName(item.getId());
-            WatchUi.popView(WatchUi.SLIDE_RIGHT);
+            var deviceName = item.getId();
+            BluetoothHandler.getInstance().connectToDeviceByName(deviceName);
+            var progressBar = new WatchUi.ProgressBar(
+                "Connecting to\n" + deviceName,
+                null
+            );
+            WatchUi.switchToView(progressBar, new DeviceConnectionProgressDelegate(progressBar, deviceName), WatchUi.SLIDE_LEFT);
         } catch (e) {
             System.println(e.getErrorMessage());
         }
     }
-
 }

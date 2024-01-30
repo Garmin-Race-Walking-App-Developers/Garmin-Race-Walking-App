@@ -4,12 +4,16 @@ using Toybox.BluetoothLowEnergy as Ble;
 class BluetoothHandler extends Ble.BleDelegate {
     private static var instance = null;
     hidden var connectableDevices;
+    private var connectedDevices;
     private var btCtx;
+    private var btReqQueue;
 
     function initialize() {
         BleDelegate.initialize();
         btCtx = BluetoothContext.getInstance();
+        btReqQueue = CommunicationQueue.getInstance();
         connectableDevices = {};
+        connectedDevices = [];
         Ble.setDelegate(self);
     }
 
@@ -27,7 +31,7 @@ class BluetoothHandler extends Ble.BleDelegate {
             var deviceName = result.getDeviceName(); 
 			if (matchingDeviceName(deviceName)) {
                 System.println("Found RWECS device");
-                if (!connectableDevices.hasKey(deviceName)) {
+                if (!connectableDevices.hasKey(deviceName) && connectedDevices.indexOf(deviceName == -1)) {
                     connectableDevices.put(deviceName, result);
                 }
 			}
@@ -52,10 +56,23 @@ class BluetoothHandler extends Ble.BleDelegate {
         System.println(status);
         System.println(value);
         //TODO UPDATE UI
+
+    }
+
+    function onCharacteristicChanged(characteristic, value) {
+        System.println(value);
+        //TODO send value to data handler
+        //TODO UPDATE UI
     }
 
     function onCharacteristicWrite(characteristic, status) {
         System.println("Write request returned status: " + status);
+        btReqQueue.run();
+    }
+
+    function onDescriptorWrite(descriptor, status) {
+        System.println("Write request returned status: " + status);
+        btReqQueue.run();
     }
 
     function getConnectableDevices() {
@@ -64,9 +81,34 @@ class BluetoothHandler extends Ble.BleDelegate {
 
     function connectToDeviceByName(name) {
         if (connectableDevices.hasKey(name)) {
-            Ble.pairDevice(connectableDevices.get(name));
+            var device = connectableDevices.get(name);
+            Ble.pairDevice(device);
             System.println("Connection success!");
+            connectedDevices.add(name);
+            connectableDevices.remove(name);
         }
+    }
+
+    function allDevicesConnected() {
+        var devices = Ble.getPairedDevices();
+        var currentDevice = devices.next() as Ble.Device;
+        while (currentDevice != null ) {
+            if (!currentDevice.isConnected()) {
+                return false;
+            }
+            currentDevice = devices.next();
+        }
+        return true;
+    }
+
+    function unpairDevices(){
+        var devices = Ble.getPairedDevices();
+        var currentDevice = devices.next() as Ble.Device;
+        while (currentDevice != null ) {
+            Ble.unpairDevice(currentDevice);
+            currentDevice = devices.next();
+        }
+        connectedDevices = [];
     }
 
     private function matchingDeviceName(deviceName) {

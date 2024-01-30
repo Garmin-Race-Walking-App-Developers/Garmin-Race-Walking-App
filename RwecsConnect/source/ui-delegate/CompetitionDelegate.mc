@@ -18,7 +18,8 @@ class CompetitionDelegate extends WatchUi.InputDelegate {
     function onKey(keyEvent as KeyEvent) {
         //Back button is pressed
         if (keyEvent.getKey() == WatchUi.KEY_ESC) {
-            WatchUi.switchToView(new RwecsConnectMenu(), new RwecsConnectMenuDelegate(), WatchUi.SLIDE_DOWN);
+            _deviceController.resetDevice();
+            WatchUi.switchToView(new MainMenu(), new MainMenuDelegate(), WatchUi.SLIDE_DOWN);
         }
         if (keyEvent.getKey() == WatchUi.KEY_ENTER) {
            startWorkout(); 
@@ -28,6 +29,7 @@ class CompetitionDelegate extends WatchUi.InputDelegate {
 
     private function startWorkout() {
         _deviceController.enableTrainingMode();
+        _view.startFlightTimeTracking();
     }
 
 }
