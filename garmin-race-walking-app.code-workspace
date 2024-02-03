@@ -35,5 +35,16 @@
 				"device": "${command:GetTargetDevice}"
 			}
 		]
+	},
+	"extensions": {
+		"recommendations": [
+			"garmin.monkey-c",
+			"streetsidesoftware.code-spell-checker",
+			"pkief.material-icon-theme",
+			"dotjoshjohnson.xml"
+		]
+	},
+	"settings": {
+		"monkeyC.typeCheckLevel": "Off"
 	}
 }
