@@ -1,5 +1,9 @@
 using Toybox.System;
 using Toybox.BluetoothLowEnergy as Ble;
+using Toybox.Lang as Lang;
+using Toybox.Attention as Attention;
+using Toybox.Math as Math;
+import Toybox.WatchUi;
 
 class BluetoothHandler extends Ble.BleDelegate {
     private static var instance = null;
@@ -7,11 +11,15 @@ class BluetoothHandler extends Ble.BleDelegate {
     private var connectedDevices;
     private var btCtx;
     private var btReqQueue;
+    private var dataParser;
+    public var averageFlightTime = 0;
 
     function initialize() {
         BleDelegate.initialize();
         btCtx = BluetoothContext.getInstance();
         btReqQueue = CommunicationQueue.getInstance();
+        dataParser = new RWECSDataParser();
+
         connectableDevices = {};
         connectedDevices = [];
         Ble.setDelegate(self);
@@ -52,17 +60,18 @@ class BluetoothHandler extends Ble.BleDelegate {
     	System.println(scanState);
     }
 
-    function onCharacteristicRead(characteristic, status, value) {
-        System.println(status);
-        System.println(value);
-        //TODO UPDATE UI
+    function onCharacteristicChanged(characteristic, value as Lang.ByteArray) {
+        averageFlightTime = dataParser.parse(value);
 
-    }
-
-    function onCharacteristicChanged(characteristic, value) {
-        System.println(value);
-        //TODO send value to data handler
-        //TODO UPDATE UI
+        if (averageFlightTime > 45) {
+            var toneProfile =
+            [
+                new Attention.ToneProfile(500, 250)
+            ];
+            Attention.playTone({:toneProfile=>toneProfile});
+        }
+      
+        WatchUi.requestUpdate();
     }
 
     function onCharacteristicWrite(characteristic, status) {
