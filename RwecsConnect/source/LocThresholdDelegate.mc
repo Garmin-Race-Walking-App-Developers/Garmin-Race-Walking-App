@@ -3,32 +3,29 @@ import Toybox.WatchUi;
 import Toybox.Timer;
 import Toybox.Math;
 
-class SettingsDelegate extends WatchUi.InputDelegate {
-    private var _view;
-    private var _settingsCtx;
+class LocThresholdDelegate extends WatchUi.InputDelegate {
+    var _view;
 
     function initialize(view) {
         InputDelegate.initialize();
-        _view = view;
-        _settingsCtx = SettingsContext.getInstance();
+        _view = view;  
     }
 
     function onKey(keyEvent as KeyEvent) {
         //Down button is pressed
         if (keyEvent.getKey() == WatchUi.KEY_DOWN) {
-            _settingsCtx.decrementAlarmLimit();
-            _view.updateAlarmLimitElement();
+            _view.updateLocThresholdValue(false);
         }
 
         //Up button is pressed
         else if (keyEvent.getKey() == WatchUi.KEY_UP) {
-            _settingsCtx.incrementAlarmLimit();
-            _view.updateAlarmLimitElement();
+            _view.updateLocThresholdValue(true);
         }
 
         //Back button is pressed
         else if (keyEvent.getKey() == WatchUi.KEY_ESC) {
-            WatchUi.switchToView(new MainMenu(), new MainMenuDelegate(), WatchUi.SLIDE_DOWN);
+            var newSettingsView = new SettingsMenu();
+            WatchUi.switchToView(newSettingsView, new SettingsMenuDelegate(newSettingsView), WatchUi.SLIDE_DOWN);
         }
         return true;
     }

@@ -1,3 +1,5 @@
+import Toybox.Application;
+import Toybox.Application.Storage;
 import Toybox.Graphics;
 import Toybox.WatchUi;
 import Toybox.Sensor;
@@ -6,7 +8,6 @@ import Toybox.Lang;
 import Toybox.Math;
 
 class WorkoutView extends WatchUi.View {
-
     private var timerIcon;
     private var locIcon;
     private var heartRateIcon;
@@ -31,11 +32,10 @@ class WorkoutView extends WatchUi.View {
         _paused = false;
         
         _timer = new Timer.Timer();
-        _timer.start(method(:onTimer), 1009, true);
+        _timer.start(method(:onTimer), 1000, true);
         
         Sensor.setEnabledSensors([Sensor.SENSOR_HEARTRATE] as Array<SensorType>);
         Sensor.enableSensorEvents(method(:onSnsr));
-
     }
 
     // Load your resources here
@@ -149,6 +149,15 @@ class WorkoutView extends WatchUi.View {
 
     //update the loss f contact (flight time) in the workout view
     function updateLOC(dc, x, y) {
+         
+        if (Storage.getValue("loc_threshold") == null) {
+            _locString = 10;
+            Storage.setValue("loc_threshold", _locString);
+        }
+        else {
+            _locString = Storage.getValue("loc_threshold");
+        }
+        
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
         dc.drawText(x+15, y-45, Graphics.FONT_NUMBER_HOT, BluetoothHandler.getInstance().averageFlightTime, Graphics.TEXT_JUSTIFY_CENTER);
     }
