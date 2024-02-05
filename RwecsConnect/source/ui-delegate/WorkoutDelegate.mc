@@ -9,12 +9,10 @@ class WorkoutDelegate extends WatchUi.InputDelegate {
     private var _deviceController;
     
 
-    function initialize(view) {
+    function initialize(view, deviceController) {
         InputDelegate.initialize();
-        _parentView = view;  
-        _deviceController = new DeviceController();
-
-        _deviceController.enableTrainingMode();
+        _parentView = view;
+        _deviceController = deviceController;
     }
 
     function onKey(keyEvent as KeyEvent) {
@@ -36,6 +34,4 @@ class WorkoutDelegate extends WatchUi.InputDelegate {
 
         return true;
     }
-
-
 }

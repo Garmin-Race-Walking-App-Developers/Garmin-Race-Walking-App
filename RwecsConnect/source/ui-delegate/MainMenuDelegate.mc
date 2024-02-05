@@ -10,8 +10,11 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
     function onSelect(item as WatchUi.MenuItem) {
         if (item.getId().equals("start")) {
             if (BluetoothHandler.getInstance().hasConnectedDevices()) {
-                var view = new WorkoutView();
-                WatchUi.pushView(view, new WorkoutDelegate(view), WatchUi.SLIDE_UP);
+                var progressBar = new WatchUi.ProgressBar(
+                    "Preparing RWECS\n",
+                    null
+                );
+                WatchUi.switchToView(progressBar, new WorkoutPrepDelegate(), WatchUi.SLIDE_LEFT);
             }
 
             else {
