@@ -88,6 +88,10 @@ class BluetoothHandler extends Ble.BleDelegate {
         return self.connectableDevices;
     }
 
+    function hasConnectedDevices() {
+        return self.connectedDevices != null && self.connectedDevices.size() != 0;
+    }
+
     function connectToDeviceByName(name) {
         if (connectableDevices.hasKey(name)) {
             var device = connectableDevices.get(name);
