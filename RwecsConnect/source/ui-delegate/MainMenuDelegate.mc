@@ -9,8 +9,15 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
 
     function onSelect(item as WatchUi.MenuItem) {
         if (item.getId().equals("start")) {
-            var view = new WorkoutView();
-            WatchUi.pushView(view, new WorkoutDelegate(view), WatchUi.SLIDE_UP); 
+            if (BluetoothHandler.getInstance().hasConnectedDevices()) {
+                var view = new WorkoutView();
+                WatchUi.pushView(view, new WorkoutDelegate(view), WatchUi.SLIDE_UP);
+            }
+
+            else {
+                var view = new ErrorView();
+                WatchUi.pushView(view, new ErrorDelegate(view), WatchUi.SLIDE_UP);
+            } 
         } 
         else if (item.getId().equals("settings")) {
             var view = new SettingsView();

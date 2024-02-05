@@ -12,4 +12,6 @@
 
     <string id="alarmLimitPrompt">Alarm Limit:</string>
     <string id="alarmLimitValue">50ms</string>
+
+    <string id="noPairedRWECSErrorMessage">No paired RWECS</string>
 </strings>

@@ -27,10 +27,10 @@ class SettingsDelegate extends WatchUi.InputDelegate {
         }
 
         //Start button is pressed
-        else if (keyEvent.getKey() == WatchUi.KEY_ENTER) {
-            var newWorkoutView = new WorkoutView();
-            WatchUi.switchToView(newWorkoutView, new WorkoutDelegate(newWorkoutView), WatchUi.SLIDE_UP); 
-        }
+        // else if (keyEvent.getKey() == WatchUi.KEY_ENTER) {
+        //     var newWorkoutView = new WorkoutView();
+        //     WatchUi.switchToView(newWorkoutView, new WorkoutDelegate(newWorkoutView), WatchUi.SLIDE_UP); 
+        // }
 
         //Back button is pressed
         else if (keyEvent.getKey() == WatchUi.KEY_ESC) {
