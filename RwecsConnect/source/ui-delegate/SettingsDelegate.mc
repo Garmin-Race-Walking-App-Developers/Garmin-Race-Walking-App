@@ -4,28 +4,31 @@ import Toybox.Timer;
 import Toybox.Math;
 
 class SettingsDelegate extends WatchUi.InputDelegate {
-    var _view;
+    private var _view;
+    private var _settingsCtx;
 
     function initialize(view) {
         InputDelegate.initialize();
-        _view = view;  
+        _view = view;
+        _settingsCtx = SettingsContext.getInstance();
     }
 
     function onKey(keyEvent as KeyEvent) {
         //Down button is pressed
         if (keyEvent.getKey() == WatchUi.KEY_DOWN) {
-            _view.updateAlarmLimitValue(false);
+            _settingsCtx.decrementAlarmLimit();
+            _view.updateAlarmLimitElement();
         }
 
         //Up button is pressed
         else if (keyEvent.getKey() == WatchUi.KEY_UP) {
-            _view.updateAlarmLimitValue(true);
+            _settingsCtx.incrementAlarmLimit();
+            _view.updateAlarmLimitElement();
         }
 
         //Start button is pressed
         else if (keyEvent.getKey() == WatchUi.KEY_ENTER) {
-            var alarmLimitValue = _view.getAlarmLimitValue();
-            var newWorkoutView = new WorkoutView(alarmLimitValue);
+            var newWorkoutView = new WorkoutView();
             WatchUi.switchToView(newWorkoutView, new WorkoutDelegate(newWorkoutView), WatchUi.SLIDE_UP); 
         }
 
