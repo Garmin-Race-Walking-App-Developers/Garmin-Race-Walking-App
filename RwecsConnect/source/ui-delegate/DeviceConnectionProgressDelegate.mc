@@ -21,7 +21,6 @@ class DeviceConnectionProgressDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onBack() {
-        endLoop();
         return true;
     }
     

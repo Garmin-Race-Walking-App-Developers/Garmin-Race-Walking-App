@@ -4,24 +4,25 @@ import Toybox.Timer;
 import Toybox.Math;
 
 class SettingsView extends WatchUi.View {
-    private var _alarmLimitValueElement;
-    private var _alarmLimitValue;
+    private var _alarmLimitElement;
+    private var _settingsCtx;
 
-    function initialize(alarmLimitValue) {
+    function initialize() {
         View.initialize();
-        _alarmLimitValue = alarmLimitValue;
+        _settingsCtx = SettingsContext.getInstance();
     }
 
     // Load your resources here
     function onLayout(dc as Dc) as Void {
         setLayout(Rez.Layouts.SettingsLayout(dc));
 
-        _alarmLimitValueElement = findDrawableById("alarm_limit");
-        updateAlarmLimitValueElement();
+        _alarmLimitElement = findDrawableById("alarm_limit");
+        updateAlarmLimitElement();
     }
 
-    function updateAlarmLimitValueElement() {
-        _alarmLimitValueElement.setText(_alarmLimitValue.toString() + "ms");
+    function updateAlarmLimitElement() {
+        _alarmLimitElement.setText(_settingsCtx.getAlarmLimit().toString() + "ms");
+        WatchUi.requestUpdate();
     }
 
     // Called when this View is brought to the foreground. Restore
@@ -40,22 +41,5 @@ class SettingsView extends WatchUi.View {
     // state of this View here. This includes freeing resources from
     // memory.
     function onHide() as Void {
-    }
-
-    function updateAlarmLimitValue(increment) as Void {
-        if (increment) {
-            _alarmLimitValue += 10;
-        }
-
-        else if (_alarmLimitValue >= 10){
-            _alarmLimitValue -= 10;
-        }
-
-        _alarmLimitValueElement.setText(_alarmLimitValue.toString() + "ms");
-        WatchUi.requestUpdate();
-    }
-
-    function getAlarmLimitValue() {
-        return _alarmLimitValue;
     }
 }
