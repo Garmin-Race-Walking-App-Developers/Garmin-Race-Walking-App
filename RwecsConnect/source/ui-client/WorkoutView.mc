@@ -19,13 +19,9 @@ class WorkoutView extends WatchUi.View {
     private var _timerValue as Number;
     private var _paused as Boolean;
 
-    private var _alarmLimitValue as Number;
-
     //intialize the workout view
-    function initialize(alarmLimit as Number) {
+    function initialize() {
         View.initialize();
-
-        _alarmLimitValue = alarmLimit;
         
         _hrString = "---";
         _locString = "--";
@@ -154,7 +150,7 @@ class WorkoutView extends WatchUi.View {
     //update the loss f contact (flight time) in the workout view
     function updateLOC(dc, x, y) {
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(x+15, y-45, Graphics.FONT_NUMBER_HOT, _locString, Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(x+15, y-45, Graphics.FONT_NUMBER_HOT, BluetoothHandler.getInstance().averageFlightTime, Graphics.TEXT_JUSTIFY_CENTER);
     }
 
 
