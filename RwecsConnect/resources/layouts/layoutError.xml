@@ -1,0 +1,9 @@
+<layout id="ErrorLayout">
+    <label
+        x="center" 
+        y="50%" 
+        text="@Strings.noPairedRWECSErrorMessage" 
+        color="Graphics.COLOR_WHITE" 
+        justification="Graphics.TEXT_JUSTIFY_CENTER" 
+    />
+</layout>
