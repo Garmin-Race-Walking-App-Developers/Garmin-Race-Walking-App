@@ -39,15 +39,11 @@ class RWECSDataParser {
             }
         }
 
-        if (parado != 0) {
+        if (parado != 0 || _flightTimeList[0] == null) {
             getNewFlightValueList();
         }
 
         if (flightValue < 100 && flightValue > -200 && parado == 0x00 && (flags & 0xF0) == 0) {
-            if (_flightTimeList == null) {
-                getNewFlightValueList();
-            }
-
             appendFlightValue(flightValue);
 
             _averageFlightTime = Math.mean(_flightTimeList);
