@@ -16,7 +16,7 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
             var view = new SettingsView();
             WatchUi.pushView(view, new SettingsDelegate(view), WatchUi.SLIDE_UP); 
         }
-        else if (item.getId().equals("connect")) {
+        else if (item.getId().equals("pair")) {
             var progressBar = new WatchUi.ProgressBar(
                 "Searching for \nRWECS devices...",
                 null
