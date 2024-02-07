@@ -1,20 +1,22 @@
 ### Description
-This merge request addresses, and describe the problem or user story being addressed.
+Describe the problem or user story being addressed by your changes
+
+### TODO
+<!-- PLEASE feel free to change these to track what needs to be done -->
+- [ ] Code follows project coding guidelines.
+- [ ] Documentation reflects the changes made.
+- [ ] Provide Proof it's working
 
 ### Changes Made
-Provide code snippets or screenshots as needed.
+What did you change?
 
 ### Related Issues
 Provide links to the related issues or feature requests.
 
-### Additional Notes
-Include any extra information or considerations for reviewers, such as impacted areas of the codebase.
-
-### Merge Request Checklists
-- [ ] Code follows project coding guidelines.
-- [ ] Documentation reflects the changes made.
-- [ ] I have already covered the unit testing.
+### How was this tested?
+Please include screen recording, screenshots, and/or logs showing your changes work
 
 /assign me 
-/assign_reviewer @alexgmaier111 @abbyjackson200 @hmn45 @johnsteve776
-/unassign_reviewer me
+<!-- Uncomment this next lines if we decide to pay for gitlab lol -->
+<!-- /assign_reviewer @alexgmaier111 @abbyjackson200 @alfonsoethan @hmn45 @johnsteve776 -->
+<!-- /unassign_reviewer me -->
