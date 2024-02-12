@@ -37,7 +37,7 @@ class DeviceConnectionProgressDelegate extends WatchUi.BehaviorDelegate {
         }
         else if (_timerCount > 10) {
             _timer.stop();
-            _btHandler.unpairDevices();
+            _btHandler.undoPairing(_deviceName);
             WatchUi.popView(WatchUi.SLIDE_RIGHT);
         }
     }

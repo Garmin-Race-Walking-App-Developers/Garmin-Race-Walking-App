@@ -26,12 +26,6 @@ class SettingsDelegate extends WatchUi.InputDelegate {
             _view.updateAlarmLimitElement();
         }
 
-        //Start button is pressed
-        // else if (keyEvent.getKey() == WatchUi.KEY_ENTER) {
-        //     var newWorkoutView = new WorkoutView();
-        //     WatchUi.switchToView(newWorkoutView, new WorkoutDelegate(newWorkoutView), WatchUi.SLIDE_UP); 
-        // }
-
         //Back button is pressed
         else if (keyEvent.getKey() == WatchUi.KEY_ESC) {
             WatchUi.switchToView(new MainMenu(), new MainMenuDelegate(), WatchUi.SLIDE_DOWN);
