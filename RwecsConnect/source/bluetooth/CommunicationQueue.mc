@@ -6,7 +6,7 @@ class CommunicationQueue {
     private static var instance = null;
 
     private var queue;
-    private var isRunning;
+    private var running;
 
     static enum {
 		CHARACTERISTIC_WRITE,
@@ -15,6 +15,7 @@ class CommunicationQueue {
 
     function initialize() {
         queue =[];
+        running = false;
     }
 
     static function getInstance() {
@@ -23,6 +24,11 @@ class CommunicationQueue {
         }
         return instance;
     }
+
+    function isRunning() {
+        return running;
+    }
+
 
     /**
     * Adds item to the request queue
@@ -36,8 +42,10 @@ class CommunicationQueue {
 
     function run() {
         if (queue.size() == 0) {
-            return;
+            return true;
         }
+
+        self.running = true; 
 
         var target = queue[0][0];
         var type = queue[0][1];
@@ -52,6 +60,12 @@ class CommunicationQueue {
 
         if( queue.size() > 0 ) {
             queue = queue.slice(1,queue.size());
-        } 
+        }
+
+        return false;
+    }
+
+    function finishRun() {
+        self.running = false;
     }
 }
