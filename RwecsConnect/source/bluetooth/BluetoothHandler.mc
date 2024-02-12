@@ -34,11 +34,9 @@ class BluetoothHandler extends Ble.BleDelegate {
     
     function onScanResults(scanResults as Ble.Iterator) {
         //Handle results
-        System.println("Results found");
         for( var result = scanResults.next(); result != null; result = scanResults.next() ) { 
             var deviceName = result.getDeviceName(); 
 			if (matchingDeviceName(deviceName)) {
-                System.println("Found RWECS device");
                 if (!connectableDevices.hasKey(deviceName) && connectedDevices.indexOf(deviceName == -1)) {
                     connectableDevices.put(deviceName, result);
                 }
@@ -47,12 +45,12 @@ class BluetoothHandler extends Ble.BleDelegate {
     }
 
     function startScan() {
-        System.println("Searhing for RWECS devices");
+        System.println("Searching for RWECS devices");
     	Ble.setScanState(Ble.SCAN_STATE_SCANNING);
     }
     
     function stopScan() {
-        System.println("No longer searhing for RWECS devices");
+        System.println("No longer searching for RWECS devices");
     	Ble.setScanState(Ble.SCAN_STATE_OFF);
     }
     
@@ -76,12 +74,12 @@ class BluetoothHandler extends Ble.BleDelegate {
 
     function onCharacteristicWrite(characteristic, status) {
         System.println("Write request returned status: " + status);
-        btReqQueue.run();
+        btReqQueue.finishRun();
     }
 
     function onDescriptorWrite(descriptor, status) {
         System.println("Write request returned status: " + status);
-        btReqQueue.run();
+        btReqQueue.finishRun();
     }
 
     function getConnectableDevices() {
@@ -96,7 +94,7 @@ class BluetoothHandler extends Ble.BleDelegate {
         if (connectableDevices.hasKey(name)) {
             var device = connectableDevices.get(name);
             Ble.pairDevice(device);
-            System.println("Connection success!");
+            System.println("Connecting to device: " + name);
             connectedDevices.add(name);
             connectableDevices.remove(name);
         }
@@ -114,7 +112,7 @@ class BluetoothHandler extends Ble.BleDelegate {
         return true;
     }
 
-    function unpairDevices(){
+    function unpairDevices() {
         var devices = Ble.getPairedDevices();
         var currentDevice = devices.next() as Ble.Device;
         while (currentDevice != null ) {
@@ -122,6 +120,22 @@ class BluetoothHandler extends Ble.BleDelegate {
             currentDevice = devices.next();
         }
         connectedDevices = [];
+    }
+
+    function undoPairing(name) {
+        connectedDevices.remove(name);
+        unpairFailedPairings();
+    }
+
+    private function unpairFailedPairings() {
+        var devices = Ble.getPairedDevices();
+        var currentDevice = devices.next() as Ble.Device;
+        while (currentDevice != null ) {
+            if (currentDevice.getName() == null) {
+                Ble.unpairDevice(currentDevice);
+            }
+            currentDevice = devices.next();
+        }
     }
 
     private function matchingDeviceName(deviceName) {
