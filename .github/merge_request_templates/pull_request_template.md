@@ -16,7 +16,5 @@ Provide links to the related issues or feature requests.
 ### How was this tested?
 Please include screen recording, screenshots, and/or logs showing your changes work
 
-/assign me 
-<!-- Uncomment this next lines if we decide to pay for gitlab lol -->
-<!-- /assign_reviewer @alexgmaier111 @abbyjackson200 @alfonsoethan @hmn45 @johnsteve776 -->
-<!-- /unassign_reviewer me -->
+/assign me
+/assign_reviewer @Garmin-Race-Walking-App-Developers/Developers
