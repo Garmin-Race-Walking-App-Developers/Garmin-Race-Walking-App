@@ -1,5 +1,5 @@
 <strings>
-    <string id="AppName">RwecsConnect</string>
+    <string id="AppName">RWECS Connect</string>
 
     <!-- Welcome screen Strings -->
     <string id="prompt">Welcome to</string>
@@ -9,11 +9,6 @@
 
     <string id="start">Start</string>
     <string id="settings">Settings</string>
-
-    <string id="sensor1Name">RWECS 69</string>
-    <string id="sensor1Battery">100%</string>
-    <string id="sensor2Name">RWECS 70</string>
-    <string id="sensor2Battery">100%</string>
 
     <string id="alarmLimitPrompt">Alarm Limit:</string>
     <string id="alarmLimitValue">50ms</string>
