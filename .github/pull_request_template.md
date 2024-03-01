@@ -15,6 +15,3 @@ Provide links to the related issues or feature requests.
 
 ### How was this tested?
 Please include screen recording, screenshots, and/or logs showing your changes work
-
-/assign me
-/assign_reviewer @Garmin-Race-Walking-App-Developers/Developers
