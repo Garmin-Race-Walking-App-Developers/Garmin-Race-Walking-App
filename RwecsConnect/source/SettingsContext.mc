@@ -15,8 +15,8 @@ class SettingsContext {
         }
 
         _rateValue = Storage.getValue(RATE_VALUE);
-        if (_thresholdValue == null) {
-            _thresholdValue = 5;
+        if (_rateValue == null) {
+            _rateValue = 5;
             saveSetting(RATE_VALUE, _rateValue);
         }
     }

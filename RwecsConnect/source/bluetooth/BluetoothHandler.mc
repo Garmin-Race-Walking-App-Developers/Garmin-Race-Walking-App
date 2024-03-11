@@ -59,9 +59,10 @@ class BluetoothHandler extends Ble.BleDelegate {
     }
 
     function onCharacteristicChanged(characteristic, value as Lang.ByteArray) {
-        averageFlightTime = dataParser.parse(value);
+        dataParser.updateFlightTimeList(value);
+        var peakFlightTime = dataParser.getPeakFlightTime();
 
-        if (averageFlightTime > 45) {
+        if (peakFlightTime > SettingsContext.getInstance().getThresholdValue()) {
             var toneProfile =
             [
                 new Attention.ToneProfile(500, 250)

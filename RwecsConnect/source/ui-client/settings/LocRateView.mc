@@ -1,9 +1,6 @@
 import Toybox.Application;
-import Toybox.Application.Storage;
 import Toybox.Graphics;
 import Toybox.WatchUi;
-import Toybox.Timer;
-import Toybox.Math;
 
 class LocRateView extends WatchUi.View {
     private var _locRateValueElement;
@@ -22,7 +19,7 @@ class LocRateView extends WatchUi.View {
     function updateLocRateValueElement() {
         _locRateValue = SettingsContext.getInstance().getRateValue();
         _locRateValueElement = findDrawableById(SettingsContext.RATE_VALUE);
-        _locRateValueElement.setText(_locRateValue + "ms");
+        _locRateValueElement.setText(_locRateValue.toString() + "ms");
     }
 
     // Update the view
