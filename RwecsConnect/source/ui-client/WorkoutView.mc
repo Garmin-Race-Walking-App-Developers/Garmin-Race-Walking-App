@@ -123,7 +123,6 @@ class WorkoutView extends WatchUi.View {
        _timer.stop(); 
     }
 
-
     //insert the borders in the workout view
     function insertBorders(dc, x, y) {
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
@@ -144,19 +143,15 @@ class WorkoutView extends WatchUi.View {
         dc.drawText(x+15, y-100, Graphics.FONT_NUMBER_MEDIUM, _hrString, Graphics.TEXT_JUSTIFY_CENTER);
     }
 
-
     //update the loss f contact (flight time) in the workout view
     function updateLOC(dc, x, y) {
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
         dc.drawText(x+15, y-45, Graphics.FONT_NUMBER_HOT, BluetoothHandler.getInstance().averageFlightTime, Graphics.TEXT_JUSTIFY_CENTER);
     }
 
-
     //update the timer in the workout view
     function updateTimer(dc, x, y) {
-
         var textColor = _paused ? Graphics.COLOR_YELLOW : Graphics.COLOR_WHITE;
-
         dc.setColor(textColor, Graphics.COLOR_TRANSPARENT);
         dc.drawText(x+15, y+50, Graphics.FONT_NUMBER_MILD, _timerString, Graphics.TEXT_JUSTIFY_CENTER);
     }

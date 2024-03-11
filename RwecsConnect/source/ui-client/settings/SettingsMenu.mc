@@ -15,7 +15,7 @@ class SettingsMenu extends WatchUi.Menu2 {
         var names = options.keys();
         var labels = options.values();
 
-        for (var i=0; i < options.size(); i++) {
+        for (var i = 0; i < options.size(); i++) {
             var name = names[i];
             var label = labels[i];
             addItem(new MenuItem(label, null, name, null));
