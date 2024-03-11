@@ -23,8 +23,7 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
             } 
         } 
         else if (item.getId().equals("settings")) {
-            var view = new SettingsView();
-            WatchUi.pushView(view, new SettingsDelegate(view), WatchUi.SLIDE_UP); 
+            WatchUi.pushView(new SettingsMenu(), new SettingsMenuDelegate(), WatchUi.SLIDE_UP); 
         }
         else if (item.getId().equals("pair")) {
             var progressBar = new WatchUi.ProgressBar(
