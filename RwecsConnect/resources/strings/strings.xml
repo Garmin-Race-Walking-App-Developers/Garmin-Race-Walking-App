@@ -10,8 +10,8 @@
     <string id="start">Start</string>
     <string id="settings">Settings</string>
 
-    <string id="alarmLimitPrompt">Alarm Limit:</string>
-    <string id="alarmLimitValue">50ms</string>
-
     <string id="noPairedRWECSErrorMessage">No paired RWECS</string>
+
+    <string id="locThresholdPrompt">LOC Threshold:</string>
+    <string id="locRatePrompt">LOC Rate:</string>
 </strings>

@@ -6,7 +6,6 @@ import Toybox.Lang;
 import Toybox.Math;
 
 class WorkoutView extends WatchUi.View {
-
     private var timerIcon;
     private var locIcon;
     private var heartRateIcon;
@@ -31,11 +30,10 @@ class WorkoutView extends WatchUi.View {
         _paused = false;
         
         _timer = new Timer.Timer();
-        _timer.start(method(:onTimer), 1009, true);
+        _timer.start(method(:onTimer), 1000, true);
         
         Sensor.setEnabledSensors([Sensor.SENSOR_HEARTRATE] as Array<SensorType>);
         Sensor.enableSensorEvents(method(:onSnsr));
-
     }
 
     // Load your resources here
