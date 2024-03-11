@@ -52,10 +52,6 @@ class RWECSDataParser {
         }
     }
 
-    function getAverageFlightTime() {
-        return Math.round(Math.mean(_flightTimeList)).toNumber();
-    }
-
     function getPeakFlightTime() {
         return max(_flightTimeList);
     }
