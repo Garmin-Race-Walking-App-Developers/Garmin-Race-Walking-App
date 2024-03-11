@@ -1,5 +1,3 @@
-import Toybox.Application;
-import Toybox.Application.Storage;
 import Toybox.Graphics;
 import Toybox.WatchUi;
 import Toybox.Sensor;
@@ -149,15 +147,6 @@ class WorkoutView extends WatchUi.View {
 
     //update the loss f contact (flight time) in the workout view
     function updateLOC(dc, x, y) {
-         
-        if (Storage.getValue("loc_threshold") == null) {
-            _locString = 10;
-            Storage.setValue("loc_threshold", _locString);
-        }
-        else {
-            _locString = Storage.getValue("loc_threshold");
-        }
-        
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
         dc.drawText(x+15, y-45, Graphics.FONT_NUMBER_HOT, BluetoothHandler.getInstance().averageFlightTime, Graphics.TEXT_JUSTIFY_CENTER);
     }
