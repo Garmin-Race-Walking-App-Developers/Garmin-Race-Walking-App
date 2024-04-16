@@ -1,7 +1,13 @@
 <drawables>
     <bitmap id="LauncherIcon" filename="launcher_icon.png" />
     <bitmap id="BLEIcon" filename="ble.bmp" />
-    <bitmap id="heartRate" filename="../images/heart_rate.jpg" />
-    <bitmap id="loc" filename="../images/loc.jpg" />
-    <bitmap id="timer" filename="../images/timer.jpg" />
+
+    <drawable-list id="border1">
+        <shape type="rectangle" x="15%" y="33%" points="[100% 33%]" width="70%" height="1%" color="Graphics.COLOR_WHITE"/>
+    </drawable-list>
+
+    <drawable-list id="border2">
+        <shape type="rectangle" x="15%" y="66%" points="[100% 66%]" width="70%" height="1%" color="Graphics.COLOR_WHITE"/>
+    </drawable-list>
+    
 </drawables>

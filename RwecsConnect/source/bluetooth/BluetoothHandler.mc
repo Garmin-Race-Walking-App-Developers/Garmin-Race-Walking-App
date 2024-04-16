@@ -73,7 +73,7 @@ class BluetoothHandler extends Ble.BleDelegate {
             var view = new ErrorView(Rez.Layouts.DiconnectErrorLayout);
             WatchUi.pushView(view, new ErrorDelegate(view), WatchUi.SLIDE_UP);
         }
-     }
+    }
 
     function onCharacteristicChanged(characteristic, value as Lang.ByteArray) {
         var currentMax = dataProcessor.update(value);
