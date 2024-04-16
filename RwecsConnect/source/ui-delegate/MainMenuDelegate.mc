@@ -32,5 +32,9 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
             );
             WatchUi.pushView(progressBar, new DeviceSearchProgressDelegate(progressBar), WatchUi.SLIDE_LEFT);
         }
+        else if (item.getId().equals("test")) {
+            var view = new WorkoutView();
+            WatchUi.pushView(view, new WorkoutDelegate(view), WatchUi.SLIDE_UP);
+        }
     }
 }
