@@ -146,7 +146,7 @@ class WorkoutView extends WatchUi.View {
     //update the loss f contact (flight time) in the workout view
     function updateLOC(dc, x, y) {
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(x+15, y-45, Graphics.FONT_NUMBER_HOT, BluetoothHandler.getInstance().averageFlightTime, Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(x+15, y-45, Graphics.FONT_NUMBER_HOT, BluetoothHandler.getInstance().peakFlightTime, Graphics.TEXT_JUSTIFY_CENTER);
     }
 
     //update the timer in the workout view

@@ -10,7 +10,8 @@ A more detailed guide can be found on [our confluence page](https://rewcsgarmin.
         - File -> Open Workspace from File ... -> open "garmin-race-walking-app.code-workspace"
     - Install workspace recommended extensions
 2. Download and install the [Garmin Connect IQ SDK](https://developer.garmin.com/connect-iq/overview/)
-    - Set the SDK version to 6.3.1
+    - Set the SDK version to 7.1.0 
+        - This is very important as earlier API versions had issues with BLE connectivity of two devices. 
     - Run the `Monkey C: Verify Installation` command to ensure the development environment is correctly setup
         - Command short-cut on windows: `control`+`shift`+`p`
         - Command short-cut on windows: `command`+`shift`+`p`

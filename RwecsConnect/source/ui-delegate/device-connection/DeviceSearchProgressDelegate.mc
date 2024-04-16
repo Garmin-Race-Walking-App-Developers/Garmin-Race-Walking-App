@@ -15,8 +15,15 @@ class DeviceSearchProgressDelegate extends WatchUi.BehaviorDelegate {
         timerCount = 0;
         timer = new Timer.Timer();
 
-        btHandler.startScan();
-        timer.start(method(:timerCallBack), 5000, true);
+        if (Ble.getAvailableConnectionCount() > 0 && btHandler.numberDevicesConnected() < 2) {
+            btHandler.startScan();
+            timer.start(method(:timerCallBack), 5000, true);
+        } 
+        else {
+            progressBar.setProgress(0);
+            progressBar.setDisplayString(
+                "Max devices \nalready paired");
+        }
     }
 
     function onBack() {
