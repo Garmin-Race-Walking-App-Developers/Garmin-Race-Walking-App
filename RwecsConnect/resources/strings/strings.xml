@@ -15,4 +15,8 @@
 
     <string id="locThresholdPrompt">Alarm threshold:</string>
     <string id="locRatePrompt">Number of steps:</string>
+
+    <string id="hrLabel">---</string>
+    <string id="locLabel">--</string>
+    <string id="timerLabel">0:00:00</string>
 </strings>

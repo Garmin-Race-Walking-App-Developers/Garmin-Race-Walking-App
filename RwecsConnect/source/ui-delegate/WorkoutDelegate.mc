@@ -12,7 +12,7 @@ class WorkoutDelegate extends WatchUi.InputDelegate {
     function initialize(view, deviceController) {
         InputDelegate.initialize();
         _parentView = view;
-        _deviceController = deviceController;
+       _deviceController = deviceController;
     }
 
     function onKey(keyEvent as KeyEvent) {

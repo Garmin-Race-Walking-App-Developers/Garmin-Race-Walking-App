@@ -6,9 +6,10 @@ import Toybox.Lang;
 import Toybox.Math;
 
 class WorkoutView extends WatchUi.View {
-    private var timerIcon;
-    private var locIcon;
-    private var heartRateIcon;
+    
+    static var HRATE_LABEL = "hrLabel";
+    private var LOC_LABEL = "locLabel";
+    private var TIMER_LABEL = "timerLabel";
    
     private var _hrString as String;
     private var _locString as String;
@@ -38,10 +39,7 @@ class WorkoutView extends WatchUi.View {
 
     // Load your resources here
     function onLayout(dc as Dc) as Void {
-        heartRateIcon = WatchUi.loadResource(Rez.Drawables.heartRate);
-        locIcon = WatchUi.loadResource(Rez.Drawables.loc);
-        timerIcon = WatchUi.loadResource(Rez.Drawables.timer);
-       
+        setLayout(Rez.Layouts.LayoutWorkout(dc));    
     }
 
     // Called when this View is brought to the foreground. Restore
@@ -52,18 +50,12 @@ class WorkoutView extends WatchUi.View {
 
     // Update the view
     function onUpdate(dc as Dc) as Void {
-        // Call the parent onUpdate function to redraw the layout
-        var x = dc.getWidth()/2;
-        var y = dc.getHeight()/2;
         
         View.onUpdate(dc);
 
-        insertBorders(dc, x, y);
-        insertTrainingImages(dc, x, y);
-
-        updateHeartRate(dc, x, y);
-        updateLOC(dc, x, y);
-        updateTimer(dc, x, y);
+        updateHeartRate(dc);
+        updateLOC(dc);
+        updateTimer(dc);
     }
 
     //! Handle sensor updates
@@ -123,37 +115,22 @@ class WorkoutView extends WatchUi.View {
        _timer.stop(); 
     }
 
-    //insert the borders in the workout view
-    function insertBorders(dc, x, y) {
-        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawLine(0, y-40, x+100, y-40);
-        dc.drawLine(0, y+40, x+100, y+40);
-    }
-
-    //insert the training images in the workout view
-    function insertTrainingImages(dc, x, y) {  
-        dc.drawBitmap(x-90, y-100, heartRateIcon);
-        dc.drawBitmap(x-100, y-35, locIcon);
-        dc.drawBitmap(x-90, y+50, timerIcon);
-    }
-
-    //update the heart rate in the workout view
-    function updateHeartRate(dc, x, y) {
-        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(x+15, y-100, Graphics.FONT_NUMBER_MEDIUM, _hrString, Graphics.TEXT_JUSTIFY_CENTER);
+      //update the heart rate in the workout view
+    function updateHeartRate(dc) {
+       findDrawableById(HRATE_LABEL).setText(_hrString);
     }
 
     //update the loss f contact (flight time) in the workout view
-    function updateLOC(dc, x, y) {
-        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(x+15, y-45, Graphics.FONT_NUMBER_HOT, BluetoothHandler.getInstance().peakFlightTime, Graphics.TEXT_JUSTIFY_CENTER);
+    function updateLOC(dc) {
+        _locString = BluetoothHandler.getInstance().peakFlightTime.toString();
+        findDrawableById(LOC_LABEL).setText(_locString);
     }
 
     //update the timer in the workout view
-    function updateTimer(dc, x, y) {
+    function updateTimer(dc) {
         var textColor = _paused ? Graphics.COLOR_YELLOW : Graphics.COLOR_WHITE;
-        dc.setColor(textColor, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(x+15, y+50, Graphics.FONT_NUMBER_MILD, _timerString, Graphics.TEXT_JUSTIFY_CENTER);
+        findDrawableById(TIMER_LABEL).setText(_timerString);
+        findDrawableById(TIMER_LABEL).setColor(textColor);
     }
 
     // Called when this View is removed from the screen. Save the
