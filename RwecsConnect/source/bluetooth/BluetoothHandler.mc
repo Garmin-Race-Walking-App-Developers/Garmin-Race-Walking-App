@@ -12,13 +12,14 @@ class BluetoothHandler extends Ble.BleDelegate {
     private var btCtx;
     private var btReqQueue;
     private var dataParser;
-    public var averageFlightTime = 0;
+    public var peakFlightTime;
 
     function initialize() {
         BleDelegate.initialize();
         btCtx = BluetoothContext.getInstance();
         btReqQueue = CommunicationQueue.getInstance();
         dataParser = new RWECSDataParser();
+        peakFlightTime = 0;
 
         connectableDevices = {};
         connectedDevices = [];
@@ -58,9 +59,20 @@ class BluetoothHandler extends Ble.BleDelegate {
     	System.println(scanState);
     }
 
+
+    function onConnectedStateChanged(device as Ble.Device, state as Ble.ConnectionState) as Void {
+        if (state == Ble.CONNECTION_STATE_CONNECTED) {
+            connectedDevices.add(device);
+        } else {
+            // Device no longer connected.
+            removeDevice(device);
+            System.error("Device disconnected");
+        }
+     }
+
     function onCharacteristicChanged(characteristic, value as Lang.ByteArray) {
         dataParser.updateFlightTimeList(value);
-        var peakFlightTime = dataParser.getPeakFlightTime();
+        peakFlightTime = dataParser.getPeakFlightTime();
 
         if (peakFlightTime > SettingsContext.getInstance().getThresholdValue()) {
             var toneProfile =
@@ -91,12 +103,19 @@ class BluetoothHandler extends Ble.BleDelegate {
         return self.connectedDevices != null && self.connectedDevices.size() != 0;
     }
 
+    function numberDevicesConnected() {
+        if (self.connectedDevices != null) {
+            return self.connectedDevices.size();
+        } else {
+            return 0;
+        }
+    }
+
     function connectToDeviceByName(name) {
         if (connectableDevices.hasKey(name)) {
             var device = connectableDevices.get(name);
             Ble.pairDevice(device);
-            System.println("Connecting to device: " + name);
-            connectedDevices.add(name);
+            System.println("Attempting to pair to device: " + name);
             connectableDevices.remove(name);
         }
     }
@@ -123,22 +142,18 @@ class BluetoothHandler extends Ble.BleDelegate {
         connectedDevices = [];
     }
 
-    function undoPairing(name) {
-        connectedDevices.remove(name);
-        unpairFailedPairings();
-    }
-
-    private function unpairFailedPairings() {
+    function unpairFailedPairings() {
         var devices = Ble.getPairedDevices();
         var currentDevice = devices.next() as Ble.Device;
         while (currentDevice != null ) {
-            if (currentDevice.getName() == null) {
+            if (connectedDevices.indexOf(currentDevice) == -1) {
                 Ble.unpairDevice(currentDevice);
             }
             currentDevice = devices.next();
         }
     }
 
+    // TODO update this to use manufacturer information, investigate Java app
     private function matchingDeviceName(deviceName) {
         if (deviceName) {
             var index = deviceName.find("RWECS");
@@ -147,5 +162,14 @@ class BluetoothHandler extends Ble.BleDelegate {
             }
         }
         return false;
+    }
+
+    private function removeDevice(device) {
+        var index = connectedDevices.indexOf(device);
+
+        if (index != -1) {
+            connectedDevices.remove(device);
+        }
+        Ble.unpairDevice(device);
     }
 }

@@ -6,6 +6,8 @@ class BluetoothContext {
     
     //Services
     private static var _customServiceUuid = Ble.stringToUuid("D973F2E0-B19E-11E2-9E96-0800200C9A66");
+
+    //Characteristics
     private static var _customServiceReadUuid = Ble.stringToUuid("D973F2E1-B19E-11E2-9E96-0800200C9A66");
     private static var _customServiceControlUuid = Ble.stringToUuid("D973F2E2-B19E-11E2-9E96-0800200C9A66");
 
