@@ -2,11 +2,13 @@ using Toybox.Lang as Lang;
 using Toybox.Math as Math;
 
 class RWECSDataParser {
+    private var all;
     private var _FLIGHT_TIME_LIST_SIZE;
     private var _flightTimeList;
     private var currentIdx = 0;
 
     function initialize() {
+        all = [];
         _FLIGHT_TIME_LIST_SIZE = SettingsContext.getInstance().getRateValue();
         _flightTimeList  = new [_FLIGHT_TIME_LIST_SIZE];
     }
@@ -39,7 +41,7 @@ class RWECSDataParser {
         
         else {
             if ((flags & 0xF0) == 0) {
-                System.println("Sensor flight value " + flightValue + " ms at " + timeStamp / 1000 + " s");
+                // System.println("Sensor flight value " + flightValue + " ms at " + timeStamp / 1000 + " s");
             }
         }
 
@@ -49,6 +51,9 @@ class RWECSDataParser {
 
         if (flightValue < 100 && flightValue > -200 && parado == 0x00 && (flags & 0xF0) == 0) {
             appendFlightValue(flightValue);
+            all.add(flightValue);
+            System.println("All: " + all);
+            System.println("Current: " + _flightTimeList);
         }
     }
 
@@ -57,6 +62,7 @@ class RWECSDataParser {
     }
 
     function getNewFlightValueList() {
+        currentIdx = 0;
         _flightTimeList = new [_FLIGHT_TIME_LIST_SIZE];
         for (var i = 0; i < _FLIGHT_TIME_LIST_SIZE; i++) {
             _flightTimeList[i] = 0;
