@@ -18,7 +18,7 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
             }
 
             else {
-                var view = new ErrorView();
+                var view = new ErrorView(Rez.Layouts.PairingErrorLayout);
                 WatchUi.pushView(view, new ErrorDelegate(view), WatchUi.SLIDE_UP);
             } 
         } 

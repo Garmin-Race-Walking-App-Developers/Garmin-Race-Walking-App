@@ -5,15 +5,18 @@ class DeviceController {
     private var btCtx;
     private var btReqQueue;
     private var _timer;
+    private var _btHandler;
 
     function initialize() {
         btCtx = BluetoothContext.getInstance();
         btReqQueue = CommunicationQueue.getInstance();
+        _btHandler = BluetoothHandler.getInstance();
     }
 
     function enableTrainingMode() {
         _enableNotifications();
         _sendWriteCommands(btCtx.TRAINING_MODE);
+        _btHandler.initializeTrainingMode();
     }
 
     function resetDevice() {
