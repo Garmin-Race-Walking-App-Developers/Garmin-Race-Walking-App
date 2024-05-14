@@ -11,6 +11,7 @@
     <string id="settings">Settings</string>
 
     <string id="noPairedRWECSErrorMessage">No paired RWECS</string>
+    <string id="unpairedRWECSErrorMessage">Device disconnected</string>
 
     <string id="locThresholdPrompt">LOC Threshold:</string>
     <string id="locRatePrompt">LOC Rate:</string>

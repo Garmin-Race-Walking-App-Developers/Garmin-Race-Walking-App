@@ -1,7 +1,7 @@
 using Toybox.Lang as Lang;
 using Toybox.Math as Math;
 
-class RWECSDataParser {
+class RWECSDataProcessor {
     private var _FLIGHT_TIME_LIST_SIZE;
     private var _flightTimeList;
     private var currentIdx = 0;
@@ -11,52 +11,47 @@ class RWECSDataParser {
         _flightTimeList  = new [_FLIGHT_TIME_LIST_SIZE];
     }
 
-    function updateFlightTimeList(value as Lang.ByteArray) {
+    function update(rawData as Lang.ByteArray) {
         var flags = 0;
         var flightValue = 0;
         var timeStamp = 0;
 
         //Flags
-        flags |= value[0]; 
+        flags |= rawData[0]; 
 
         //FT in ms
-        flightValue |= value[2];
+        flightValue |= rawData[2];
         flightValue <<= 8;
-        flightValue |= value[1] & 0xFF;
+        flightValue |= rawData[1] & 0xFF;
 
         //Relative time
-        timeStamp |= value[5] & 0xFF;
+        timeStamp |= rawData[5] & 0xFF;
         timeStamp <<= 8;
-        timeStamp |= value[4] & 0xFF;
+        timeStamp |= rawData[4] & 0xFF;
         timeStamp <<= 8;
-        timeStamp |= value[3] & 0xFF;
+        timeStamp |= rawData[3] & 0xFF;
 
-        var parado = flags & 0x20;
+        var stopped = flags & 0x20;
 
-        if (parado != 0) {
+        if (stopped != 0) {
             System.println("Sensor stopped at " + timeStamp / 1000 + " s");
         } 
-        
-        else {
-            if ((flags & 0xF0) == 0) {
-                System.println("Sensor flight value " + flightValue + " ms at " + timeStamp / 1000 + " s");
-            }
-        }
 
-        if (parado != 0 || _flightTimeList[0] == null) {
-            getNewFlightValueList();
-        }
+        // Debug print value - remove for build 
+        // else if ((flags & 0xF0) == 0) {
+        //     System.println("Sensor flight value " + flightValue + " ms at " + timeStamp / 1000 + " s");
+        // }
 
-        if (flightValue < 100 && flightValue > -200 && parado == 0x00 && (flags & 0xF0) == 0) {
+        else if (flightValue < 100 && flightValue > -200 && stopped == 0x00 && (flags & 0xF0) == 0) {
             appendFlightValue(flightValue);
+            checkStepViolation(flightValue);
         }
-    }
 
-    function getPeakFlightTime() {
         return max(_flightTimeList);
     }
 
     function getNewFlightValueList() {
+        currentIdx = 0;
         _flightTimeList = new [_FLIGHT_TIME_LIST_SIZE];
         for (var i = 0; i < _FLIGHT_TIME_LIST_SIZE; i++) {
             _flightTimeList[i] = 0;
@@ -86,5 +81,16 @@ class RWECSDataParser {
         }
 
         return max;
+    }
+
+    // Checks if the flight time value exceeds threshold. Beeps on violation
+    private function checkStepViolation(value) {
+        if (value > SettingsContext.getInstance().getThresholdValue()) {
+            var toneProfile =
+            [
+                new Attention.ToneProfile(500, 250)
+            ];
+            Attention.playTone({:toneProfile=>toneProfile});
+        }
     }
 }
