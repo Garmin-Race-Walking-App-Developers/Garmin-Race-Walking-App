@@ -15,7 +15,7 @@ class ErrorDelegate extends WatchUi.InputDelegate {
     function onKey(keyEvent as KeyEvent) {
         //Back button is pressed
         if (keyEvent.getKey() == WatchUi.KEY_ESC) {
-            WatchUi.switchToView(new MainMenu(), new MainMenuDelegate(), WatchUi.SLIDE_DOWN);
+            WatchUi.popView(WatchUi.SLIDE_DOWN);
         }
         return true;
     }

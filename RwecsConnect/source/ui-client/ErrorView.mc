@@ -4,13 +4,16 @@ import Toybox.Timer;
 import Toybox.Math;
 
 class ErrorView extends WatchUi.View {
-    function initialize() {
+    private var _layout;
+
+    function initialize(layout) {
         View.initialize();
+        _layout = layout;
     }
 
     // Load your resources here
     function onLayout(dc as Dc) as Void {
-        setLayout(Rez.Layouts.ErrorLayout(dc));
+        setLayout(_layout(dc));
     }
 
     // Called when this View is brought to the foreground. Restore

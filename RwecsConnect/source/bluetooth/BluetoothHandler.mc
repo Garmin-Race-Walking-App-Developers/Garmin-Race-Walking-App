@@ -11,14 +11,14 @@ class BluetoothHandler extends Ble.BleDelegate {
     private var connectedDevices;
     private var btCtx;
     private var btReqQueue;
-    private var dataParser;
+    private var dataProcessor;
     public var peakFlightTime;
 
     function initialize() {
         BleDelegate.initialize();
         btCtx = BluetoothContext.getInstance();
         btReqQueue = CommunicationQueue.getInstance();
-        dataParser = new RWECSDataParser();
+        dataProcessor = new RWECSDataProcessor();
         peakFlightTime = 0;
 
         connectableDevices = {};
@@ -31,6 +31,10 @@ class BluetoothHandler extends Ble.BleDelegate {
             instance = new BluetoothHandler();
         }
         return instance;
+    }
+
+    function initializeTrainingMode() {
+        dataProcessor.getNewFlightValueList();
     }
     
     function onScanResults(scanResults as Ble.Iterator) {
@@ -66,23 +70,18 @@ class BluetoothHandler extends Ble.BleDelegate {
         } else {
             // Device no longer connected.
             removeDevice(device);
-            System.error("Device disconnected");
+            var view = new ErrorView(Rez.Layouts.DiconnectErrorLayout);
+            WatchUi.pushView(view, new ErrorDelegate(view), WatchUi.SLIDE_UP);
         }
      }
 
     function onCharacteristicChanged(characteristic, value as Lang.ByteArray) {
-        dataParser.updateFlightTimeList(value);
-        peakFlightTime = dataParser.getPeakFlightTime();
+        var currentMax = dataProcessor.update(value);
 
-        if (peakFlightTime > SettingsContext.getInstance().getThresholdValue()) {
-            var toneProfile =
-            [
-                new Attention.ToneProfile(500, 250)
-            ];
-            Attention.playTone({:toneProfile=>toneProfile});
+        if (currentMax != null && peakFlightTime != currentMax) {
+            peakFlightTime = currentMax;
+            WatchUi.requestUpdate();
         }
-      
-        WatchUi.requestUpdate();
     }
 
     function onCharacteristicWrite(characteristic, status) {
