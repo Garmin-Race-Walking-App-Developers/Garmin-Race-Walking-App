@@ -33,7 +33,9 @@ class SettingsContext {
     }
 
     function incrementThresholdValue() {
+        if (_thresholdValue < 60) {
         _thresholdValue += 2;
+        }
         saveSetting(THRESHOLD_VALUE, _thresholdValue);
     }
 
@@ -49,12 +51,14 @@ class SettingsContext {
     }
 
     function incrementRateValue() {
+        if (_rateValue < 15) {
         _rateValue +=1;
+        }
         saveSetting(RATE_VALUE, _rateValue);
     }
 
     function decrementRateValue() {
-        if (_rateValue > 0) {
+        if (_rateValue > 5) {
         _rateValue -=1;
         saveSetting(RATE_VALUE, _rateValue);
         }
