@@ -7,8 +7,7 @@ class RWECSDataProcessor {
     private var currentIdx = 0;
 
     function initialize() {
-        _FLIGHT_TIME_LIST_SIZE = SettingsContext.getInstance().getRateValue();
-        _flightTimeList  = new [_FLIGHT_TIME_LIST_SIZE];
+       self.getNewFlightValueList();
     }
 
     function update(rawData as Lang.ByteArray) {
@@ -51,8 +50,9 @@ class RWECSDataProcessor {
     }
 
     function getNewFlightValueList() {
+        _FLIGHT_TIME_LIST_SIZE = SettingsContext.getInstance().getRateValue();
+        _flightTimeList  = new [_FLIGHT_TIME_LIST_SIZE];
         currentIdx = 0;
-        _flightTimeList = new [_FLIGHT_TIME_LIST_SIZE];
         for (var i = 0; i < _FLIGHT_TIME_LIST_SIZE; i++) {
             _flightTimeList[i] = 0;
         }
