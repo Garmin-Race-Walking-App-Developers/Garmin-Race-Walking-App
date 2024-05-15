@@ -2,12 +2,12 @@ import Toybox.WatchUi;
 
 class SettingsMenu extends WatchUi.Menu2 {
     private const menuOptions = {
-        "loc_threshold" => "      LOC Threshold",
-        "loc_rate" => "      LOC Rate",
+        "loc_threshold" => "Alarm Threshold",
+        "loc_rate" => "Step Sample Size",
     };
 
     function initialize() {
-        Menu2.initialize({:title=>"Settings menu:"});
+        Menu2.initialize({:title=>"Settings:"});
         addItems(menuOptions);
     }
 

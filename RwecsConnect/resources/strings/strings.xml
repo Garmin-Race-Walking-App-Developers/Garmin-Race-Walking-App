@@ -13,6 +13,6 @@
     <string id="noPairedRWECSErrorMessage">No paired RWECS</string>
     <string id="unpairedRWECSErrorMessage">Device disconnected</string>
 
-    <string id="locThresholdPrompt">LOC Threshold:</string>
-    <string id="locRatePrompt">LOC Rate:</string>
+    <string id="locThresholdPrompt">Alarm threshold:</string>
+    <string id="locRatePrompt">Number of steps:</string>
 </strings>

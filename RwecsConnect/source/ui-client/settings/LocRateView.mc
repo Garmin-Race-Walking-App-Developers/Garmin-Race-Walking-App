@@ -19,7 +19,7 @@ class LocRateView extends WatchUi.View {
     function updateLocRateValueElement() {
         _locRateValue = SettingsContext.getInstance().getRateValue();
         _locRateValueElement = findDrawableById(SettingsContext.RATE_VALUE);
-        _locRateValueElement.setText(_locRateValue.toString() + "ms");
+        _locRateValueElement.setText(_locRateValue.toString());
     }
 
     // Update the view
