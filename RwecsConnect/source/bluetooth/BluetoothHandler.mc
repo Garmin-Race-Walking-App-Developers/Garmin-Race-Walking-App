@@ -70,7 +70,7 @@ class BluetoothHandler extends Ble.BleDelegate {
         } else {
             // Device no longer connected.
             removeDevice(device);
-            var view = new ErrorView(Rez.Layouts.DiconnectErrorLayout);
+            var view = new ErrorView(Rez.Layouts.DisconnectErrorLayout);
             WatchUi.pushView(view, new ErrorDelegate(view), WatchUi.SLIDE_UP);
         }
     }
